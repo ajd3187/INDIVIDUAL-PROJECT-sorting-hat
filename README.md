@@ -1,57 +1,47 @@
-# Sorting Hat
+# Sorting Hat Project
 
-## Goals
-The goal of this project is to test your knowledge and to have a FUN time stretching yourself on your FIRST independent application that will become a part of your portfolio.
+# Overview
 
-Focus on MVP. Do not spend a ton of time styling initially. Hit functionality first and then spend time on the styling of the project using bootstrap.
+My goal for this project was to create a program that could Create cards on the DOM that had a random "sorting" of attributes for each object. I am not a big Harry Potter fan
+so to amuse myself I instead chose to use 1930's Louisiana state politics as the theme. Instead of Voldy it was meant to have Huey Long, a popular and wildly corrupt Governor. 
 
-- READ THROUGH ALL OF THE INFORMATION BELOW before planning how you will tackle the project.
-- Check the Issue Tickets to organize your process. You will have all week in class to work on this in class. 
-- PLEASE submit questions in help tickets if you need help. We will guide you to the resources that are available to you.
-- When done, tell an instructor. Everyone will present how far they got AND their favorite piece of code that they wrote to an instructor.
-- MOST OF ALL HAVE FUN!!!!!
+Each "Political Actor" Would have one of four Political Positions and Political Affiliations that would be randomly assigned after creation. When the delete button is to be pressed 
+this would have been represented as "Patronizing" meaning that the political actor had been bribed, blackmailed, extorted ... etc into Huey Long's Patron Client network something he was notorius for doing in real Life. 
 
-## Instructions
-You are in charge of bringing the Hogwarts sorting hat to life! 
+I was able to finish the following:
+1. Can create new cards on DOM from a form that the user enters info into. Each card is then randomly assigned a political position and affiliation. This is my version of the "Sorting" of the sorting hat.
+2. Can delete a card off the DOM by removing it from the array and updating the DOM.
 
-This is what the finished app should have:
-- To start off with, you will use a [bootstrap card](https://getbootstrap.com/docs/5.0/components/card/#header-and-footer) to have your sorting hat introduce itself and start the sorting process (by clicking on a button). The form should not be on the DOM until the button click happens.
+# Build Status
 
-- A [bootstrap form](https://getbootstrap.com/docs/5.0/forms/overview/) will then appear to fill in the student's name and a button to sort. This should then assign the student to a random house (Gryffindor, Hufflepuff, Ravenclaw, or Slytherin). 
+Here is what I failed to do:
+1. Styling, I simply gave up on all styling until i could have MVP.
+2. The delete function works fine but something about the way I set the loop makes the Creation of New Political Actors to make more than one. If I comment out the delete function it works correctly but I ran out of time. 
 
-- On sorting a student, the form should clear and a [bootstrap card](https://getbootstrap.com/docs/5.0/components/card/) with the student's name and a random house assignment should print below the form. 
+# The things I have Learned and the Friends I have made along the way.
+1. I think I finally understand how functions and Pass By Reference are used in coding to have elegant solutions to CRUD problems. An example of this is how i needed to figure out how to diferentiate the "Houses". I accomplished that by using the Math.Random() method to randomly pick the index of an array containg the four possible Political Affiliations(houses).
 
-- You should also be able to expel a student after they have been sorted, which should remove their card from the student array and move them to Moldy Voldy's Army.
+//these two arrays will be used to choose an affiliation and position when creating the Cards
+const affiliationType = ["Dixie-Crat","New Dealer","Populist","Old Establishment"]
+const positionType = ["City Councilor","Fire Chief","County Surveyor","State Senator"]
 
-In the end, your app will look something like: 
+const createNewPols = (newPol) => {
 
-![screencapture-drt-sorting-netlify-app-2022-04-23-14_28_47](https://user-images.githubusercontent.com/29741570/164943525-d20275be-c312-42d1-9730-0c1fd3fd9834.png)
+    newPol.preventDefault();
+    //the actual new Card
+    const newPolObj = {
+      id: politicalActors.length + 1,
+      affiliation: affiliationType[Math.floor(Math.random()*4)],
+      image: document.querySelector("#image").value,
+      name: document.querySelector("#name").value,
+      position: positionType[Math.floor(Math.random()*4)]
+    }
 
+    politicalActors.push(newPolObj);
+    polActOnDom(politicalActors);
+    form.reset();
 
-<!-- [See Demo](https://drt-sortinghat.netlify.app/)
- -->
-## Technical Requirements
-- You MUST plan your project and highly suggest using issue tickets. There are a few that have been provided for you to use already. Continue to add to these so you know what work you need to complete. 
-- You MAY use the `renderToDom()` function that we worked on in class, but you also need to be able to explain it if you use it
-- You have to create a data structure for your project. Review all the elements that need to be on the DOM and create the structure accordingly
-- You must use [Boostrap](https://getbootstrap.com/) to style your page components
-- You must use a loop other than a `for loop`
-- Your JS file should be comprised of functions, no actions should happen in your code outside of a function except for your initial `startApp()` function
-- Your code MUST be YOUR code. Do not copy and paste code into your project. Type every bit of it out
-- Your HTML and JS should all have proper indentation
-- Helpful Form: An error message shows if a user tries to sort a student without filling out the form
-- Voldermort's Army: Create a separate container of cards that hold the cards for students that have been expelled. These should be styled differently from Hogwarts students.
-- Add filter buttons to filter the non-expelled students by house
+  }
 
-## DEFINITION OF DONE
-Once you have completed all the technical requirments, you should complete the following:
-- [README Requirements](https://github.com/orgs/nss-evening-web-development/discussions/13)
-- **RECOMMENDED** Loom Video: [Sign up for Loom](https://www.loom.com/signup) and record a video of you walking through your app 
-
-## Expel Button Hints
-Think of a way you can expel students without just hiding those divs on the page. This would mean when the button is clicked you modify the array of students and pass the new array into your `renderToDom()` function.  Double hint - put a unique id in the student object when you create them.
-
-## Optional Bonus
-- House Colors: The color of the student's card changes depending on which house they were sorted.
-- Card Sorting/Ordering: Sort the student cards by some criteria (i.e. alphabetically by name, by house)
-
+  # Loom Link
+  https://www.loom.com/share/d49437470a3d4f59b87f2c3f61668a13?sid=bb9554db-c2c5-412c-90ea-b0a1e6d5cc42
